@@ -4,12 +4,23 @@
       "active": true,
       "sheetId": "1tlBXfvzTaP4l6AmAaqpXcLJI54xnF5OJBHa1dbY_xbY",
       "options": {
-        "credentials": "GOOGLE_SERVICE_ACCOUNT_KEY"
+        "credentials": {
+          "type": "service_account",
+          "project_id": "bank-sync-personal",
+          "private_key_id": "f029a6d1a10fd70aaebafac950e78f7c0ed925a9",
+          "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCt1PSlzL6G+cof\nkTo72P2P2FPksaS0TuFf68ss4zLuv+FmXEak0oARxoYy5W+UV8H6QywebwOpkwHw\n4yWR3+8rFQ25o7YBXnXldLRYqJ3Bg510uXH3B1wcG18xxqWorXE/2eDz3LAk/tDx\ny1a0ySvRg50KXzl79ZGAz/5CdTvZI0vshbhPpCtuW9cWoYA8jZiLtFl8qBrgC+7q\n/Lj67T4PlqL3W/9rsNVGqUbModmK/rizcZGfzqiR3m4CAyLpIrOGWIDmi+ocV8EL\nUUeFXlXaIYf8Of5y8BrurBuheKxYSR9qd0WZl3lDeryKB9vWALVX3GTea0Jlw86J\nTvVOBHBxAgMBAAECggEAJOhl8E0GN/zRsj2gxmO2RIQbHd+s1363Ael7yEJOBlyV\ntCjL9ANgn0WOKUDHHdE7NZJtC+IoviihHR7xU2VfL7/G2/87LdO7RvZuMzPL2PJD\nrGySWq+EmlAieFxTwHpg5Pxy83wMJzK2NNxmQrjC1bdy0KiyuRPE6rteoggnppyq\n6yZVaYciJk6gvaI+EJxRXCAyczVso+UGjHeUFaODH3rzOYiu3FvNf2ACaOg1Lcht\ncTuj2cYYr2pwLjSaOSnkOswGA7Q71VlD0dMS6etRWGtQlIci4AMhaTLnLElobdP7\nwekbNGpyp5T2pXjmbiPopMuQj9KNTDIj5Mc9sd5M9QKBgQDgPdxUtcIJiv3zouAd\nq4BjpQTDM8+TjGQ4upjJ7P9LncnJIlYS32S9nHgtg+Nq1azeEQMlCkkM+ALx21a+\n3tx94uYoUXhd67IKXeqiIKxJPVhWDzNlSxOM3Csxh2Fc9G4BD5UmlG6OfGEpD6sf\nPgQCGVgHXlluyUrDYfuRaLRgjQKBgQDGc24bFZfwsZT6yhwxUF8zimy8ycUzMVAM\nJxHPV4ciuZY7wk4dNZTAm6cg/DKpyJpspS4nmnLpb+FxrhuXuBbkelrxZiTMpkyQ\ncMqjVTpacJK82tAIR6qiVNJYYQy2sZL/cuGMePdaL0nr0OB1BpaOJo4EecVaq0nr\nsxdGrZmQdQKBgQCZK+g6vMTD+/sn1tO7sJBMgEXWiKd7o+Q5k8wV8hsYrblN+HRP\nA+UuV5kHjhVjvn0MWxaI0JPBlg984VRJoLWAD+MjGzNbBEpjJm/FOwg0JwEWF+AF\nitjZ2PJwLIdnFVemxdwdtDooffFoONmsx5G5VVJ6BgqU0E6PU3ihhKHhaQKBgQCP\nxFQB/xTB5ISfYwglmao+dovsAOiB+7mX9D3szeYye+ygglWAx65qEtlzBgHWCmQF\nTW0wd63D+6+BYbbPpSfAgfucYnlKYTeadHv48+eAWYmUk5ieRv0Q+Q4hxL0nJWHu\n+dT4pTHc/eE5m2rgnNM5TCkaiPU2iFzXCjlUlLNpeQKBgDvYdTpasMmlo3LyoaL6\nK8TqPhJx8Dvi2jQb+2woTPQEX/ci2dEfonA8C1re4mmqb6bl+NcVCB46a92TxUyB\nLtZ6zVgonfqioA0BQ47n3f/edcsQopkzhw2Wt6IAceVRJKsq+juRnHxM6RbeInYd\nDhPuS6UdcO0W6KgwpS8kysc1\n-----END PRIVATE KEY-----\n",
+          "client_email": "moneyman-bot@bank-sync-personal.iam.gserviceaccount.com",
+          "client_id": "108661948164869918071",
+          "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+          "token_uri": "https://oauth2.googleapis.com/token",
+          "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+          "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/moneyman-bot%40bank-sync-personal.iam.gserviceaccount.com",
+          "universe_domain": "googleapis.com"
+        }
       }
     }
   },
   "accounts": [
-    // חשבון בנק לאומי לדוגמה:
     {
       "companyId": "leumi",
       "loginFields": {
@@ -17,7 +28,6 @@
         "password": "Yonatan2018"
       }
     },
-    // חשבון הבנק הבינלאומי לדוגמה:
     {
       "companyId": "fibi",
       "loginFields": {
