@@ -1,0 +1,29 @@
+{
+  "outputVendors": {
+    "googleSheets": {
+      "active": true,
+      "sheetId": "1tlBXfvzTaP4l6AmAaqpXcLJI54xnF5OJBHa1dbY_xbY",
+      "options": {
+        "credentials": "GOOGLE_SERVICE_ACCOUNT_KEY"
+      }
+    }
+  },
+  "accounts": [
+    // חשבון בנק לאומי לדוגמה:
+    {
+      "companyId": "leumi",
+      "loginFields": {
+        "username": "DAWLZA4",
+        "password": "Yonatan2018"
+      }
+    },
+    // חשבון הבנק הבינלאומי לדוגמה:
+    {
+      "companyId": "fibi",
+      "loginFields": {
+        "username": "I02YBM8",
+        "password": "Medical1979-"
+      }
+    }
+  ]
+}
