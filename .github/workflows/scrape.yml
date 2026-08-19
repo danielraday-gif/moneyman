@@ -1,15 +1,44 @@
-- name: Run scraper
+name: scrape
+
+on:
+  workflow_dispatch:
+    inputs:
+      DEBUG:
+        description: 'DEBUG'
+        required: false
+        default: ''
+      sendNewConfigToTg:
+        description: 'sendNewConfigToTg'
+        required: false
+        default: 'false'
+  schedule:
+    - cron: '0 5,13 * * *'
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set container image
+        id: set-container-image
         run: |
-          echo "$MONEYMAN_CONFIG" > config.json
+          echo "image=ghcr.io/${{ github.repository_owner }}/moneyman:latest" >> $GITHUB_OUTPUT
+
+      - name: Pull container image
+        run: docker pull ${{ steps.set-container-image.outputs.image }}
+
+      - name: Run scraper
+        run: |
           docker run --rm \
-            -v $(pwd)/config.json:/moneyman.json \
+            -v "$(pwd)/moneyman.conf.jsonc:/moneyman.json" \
             -e MONEYMAN_CONFIG_PATH=/moneyman.json \
             -e DEBUG \
             -e TZ \
             -e SEND_NEW_CONFIG_TO_TG \
             ${{ steps.set-container-image.outputs.image }}
         env:
-          MONEYMAN_CONFIG: ${{ secrets.MONEYMAN_CONFIG }}
           DEBUG: ${{ github.event.inputs.DEBUG || '' }}
           TZ: "Asia/Jerusalem"
           SEND_NEW_CONFIG_TO_TG: ${{ github.event.inputs.sendNewConfigToTg }}
