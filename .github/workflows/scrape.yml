@@ -18,9 +18,6 @@ jobs:
   scrape:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Set container image
         id: set-container-image
         run: |
@@ -30,15 +27,15 @@ jobs:
         run: docker pull ${{ steps.set-container-image.outputs.image }}
 
       - name: Run scraper
+        env:
+          CONFIG_DATA: ${{ secrets.MONEYMAN_CONFIG }}
+          DEBUG: ${{ github.event.inputs.DEBUG || '' }}
+          TZ: "Asia/Jerusalem"
+          SEND_NEW_CONFIG_TO_TG: ${{ github.event.inputs.sendNewConfigToTg }}
         run: |
           docker run --rm \
-            -v "$(pwd)/moneyman.conf.jsonc:/moneyman.json" \
-            -e MONEYMAN_CONFIG_PATH=/moneyman.json \
+            -e MONEYMAN_CONFIG="$CONFIG_DATA" \
             -e DEBUG \
             -e TZ \
             -e SEND_NEW_CONFIG_TO_TG \
             ${{ steps.set-container-image.outputs.image }}
-        env:
-          DEBUG: ${{ github.event.inputs.DEBUG || '' }}
-          TZ: "Asia/Jerusalem"
-          SEND_NEW_CONFIG_TO_TG: ${{ github.event.inputs.sendNewConfigToTg }}
