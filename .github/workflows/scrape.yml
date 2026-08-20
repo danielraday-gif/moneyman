@@ -18,13 +18,11 @@ jobs:
   scrape:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Set container image
         id: set-container-image
         run: |
-          echo "image=ghcr.io/${{ github.repository_owner }}/moneyman:latest" >> $GITHUB_OUTPUT
+          echo "repository=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+          echo "image=ghcr.io/$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]'):latest" >> $GITHUB_OUTPUT
 
       - name: Pull container image
         run: docker pull ${{ steps.set-container-image.outputs.image }}
@@ -32,9 +30,13 @@ jobs:
       - name: Run scraper
         run: |
           docker run --rm \
-            -v "$GITHUB_WORKSPACE/moneyman.conf.jsonc:/moneyman/dist/moneyman.conf.jsonc" \
-            -v "$GITHUB_WORKSPACE/moneyman.conf.jsonc:/moneyman/moneyman.conf.jsonc" \
-            -v "$GITHUB_WORKSPACE/moneyman.conf.jsonc:/moneyman.conf.jsonc" \
-            -w /moneyman \
-            ${{ steps.set-container-image.outputs.image }} \
-            node dist/index.js
+            -e MONEYMAN_CONFIG \
+            -e DEBUG \
+            -e TZ \
+            -e SEND_NEW_CONFIG_TO_TG \
+            ${{ steps.set-container-image.outputs.image }}
+        env:
+          MONEYMAN_CONFIG: ${{ secrets.MONEYMAN_CONFIG }}
+          DEBUG: ${{ github.event.inputs.DEBUG || 'moneyman:*' }}
+          TZ: "Asia/Jerusalem"
+          SEND_NEW_CONFIG_TO_TG: ${{ github.event.inputs.sendNewConfigToTg }}
