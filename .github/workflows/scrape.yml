@@ -6,7 +6,7 @@ on:
       DEBUG:
         description: 'DEBUG'
         required: false
-        default: ''
+        default: 'moneyman:*'
       sendNewConfigToTg:
         description: 'sendNewConfigToTg'
         required: false
@@ -31,11 +31,9 @@ jobs:
 
       - name: Run scraper
         run: |
+          CONFIG_CONTENT=$(cat "$GITHUB_WORKSPACE/moneyman.conf.jsonc")
           docker run --rm \
-            -v "$GITHUB_WORKSPACE/moneyman.conf.jsonc:/app/moneyman.json" \
-            -e MONEYMAN_CONFIG_PATH=/app/moneyman.json \
-            -e DEBUG \
+            -e MONEYMAN_CONFIG="$CONFIG_CONTENT" \
+            -e DEBUG="moneyman:*" \
             -e TZ="Asia/Jerusalem" \
             ${{ steps.set-container-image.outputs.image }}
-        env:
-          DEBUG: ${{ github.event.inputs.DEBUG || '' }}
