@@ -31,11 +31,10 @@ jobs:
 
       - name: Run scraper
         run: |
-          cp "$GITHUB_WORKSPACE/moneyman.conf.jsonc" "$GITHUB_WORKSPACE/config.json"
           docker run --rm \
-            -v "$GITHUB_WORKSPACE/config.json:/moneyman/config.json" \
-            -v "$GITHUB_WORKSPACE/config.json:/moneyman.json" \
-            -e MONEYMAN_CONFIG_PATH=/moneyman.json \
-            -e DEBUG="moneyman:*" \
-            -e TZ="Asia/Jerusalem" \
-            ${{ steps.set-container-image.outputs.image }}
+            -v "$GITHUB_WORKSPACE/moneyman.conf.jsonc:/moneyman/dist/moneyman.conf.jsonc" \
+            -v "$GITHUB_WORKSPACE/moneyman.conf.jsonc:/moneyman/moneyman.conf.jsonc" \
+            -v "$GITHUB_WORKSPACE/moneyman.conf.jsonc:/moneyman.conf.jsonc" \
+            -w /moneyman \
+            ${{ steps.set-container-image.outputs.image }} \
+            node dist/index.js
