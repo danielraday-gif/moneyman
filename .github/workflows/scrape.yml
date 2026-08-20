@@ -27,14 +27,13 @@ jobs:
         run: docker pull ${{ steps.set-container-image.outputs.image }}
 
       - name: Run scraper
+        env:
+          RAW_CONFIG: ${{ secrets.MONEYMAN_CONFIG }}
         run: |
-          echo "$CONFIG_DATA" > /tmp/config.json
+          COMPACT_CONFIG=$(echo "$RAW_CONFIG" | jq -c .)
           docker run --rm \
-            -v /tmp/config.json:/config.json \
-            -e MONEYMAN_CONFIG_PATH=/config.json \
+            -e MONEYMAN_CONFIG="$COMPACT_CONFIG" \
             -e DEBUG="moneyman:*" \
             -e TZ="Asia/Jerusalem" \
             -e SEND_NEW_CONFIG_TO_TG="${{ github.event.inputs.sendNewConfigToTg }}" \
             ${{ steps.set-container-image.outputs.image }}
-        env:
-          CONFIG_DATA: ${{ secrets.MONEYMAN_CONFIG }}
